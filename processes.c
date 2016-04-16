@@ -188,8 +188,13 @@ static char* format_process_info (pid_t pid)
 	result = (char*) xmalloc (result_length);
 	/* Format the result.  */
 	snprintf (result, result_length,
-			  "<tr><td align=\"right\">%d</td><td><tt>%s</tt></td><td>%s</td>"
-			  "<td>%s</td><td align=\"right\">%d</td></tr>\n",
+			  "<tr align=\"center\">"
+			  " <td align=\"right\">%d</td>"
+			  " <td><tt>%s</tt></td>"
+			  " <td>%s</td>"
+			  " <td>%s</td>"
+			  " <td align=\"right\">%d</td>"
+			  "</tr>\n",
 			  (int) pid, program_name, user_name, group_name, rss);
 	/* Clean up.  */
 	free (program_name);

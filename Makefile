@@ -7,7 +7,7 @@ SOURCES					= server.c module.c common.c main.c
 # Corresponding object files.
 OBJECTS					= $(SOURCES:.c=.o)
 # Server module library shared files.
-MODULES					= diskfree.so issue.so processes.so time.so
+MODULES					= diskfree.so issue.so processes.so time.so cpuinfo.so
 
 ### Rules.  ############################################################
 
@@ -27,7 +27,6 @@ clean:
 # libdl, which contains calls for dynamic loading.
 server:			$(OBJECTS)
 		$(CC) $(CFLAGS) -Wl,-export-dynamic -o $@ $^ -ldl
-#		$(CC) $(CFLAGS) -Wl,-export-dynamic -o $@ $^ -ldl
 
 # All object file in the server depend on server.h.  But use the
 # default rule for building object files from source files.
