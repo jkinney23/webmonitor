@@ -184,7 +184,7 @@ static char* format_process_info (pid_t pid)
 	/* Compute the length of the string we'll need to hold the result and
 	 * allocate memory to hold it.  */
 	result_length = strlen (program_name)
-	  + strlen (user_name + strlen (group_name) + 128);
+	  + strlen (user_name) + strlen (group_name) + 128;
 	result = (char*) xmalloc (result_length);
 	/* Format the result.  */
 	snprintf (result, result_length,
