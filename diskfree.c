@@ -10,6 +10,7 @@
 
 static char* page_start = 
 	"<html>\n"
+	" <head><title>Disk Usage and Free Space</title></head>\n"
 	" <body>\n"
 	"   <pre>\n";
 	

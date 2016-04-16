@@ -188,12 +188,13 @@ static char* format_process_info (pid_t pid)
 	result = (char*) xmalloc (result_length);
 	/* Format the result.  */
 	snprintf (result, result_length,
-			  "<tr align=\"center\">"
-			  " <td align=\"right\">%d</td>"
-			  " <td><tt>%s</tt></td>"
-			  " <td>%s</td>"
-			  " <td>%s</td>"
-			  " <td align=\"right\">%d</td>"
+			  "    <tr align=\"center\">"
+			  "<td align=\"right\">%d</td>"
+//			  "<td><tt>%s</tt></td>"
+			  "<td>%s</td>"
+			  "<td>%s</td>"
+			  "<td>%s</td>"
+			  "<td align=\"right\">%d</td>"
 			  "</tr>\n",
 			  (int) pid, program_name, user_name, group_name, rss);
 	/* Clean up.  */
@@ -207,7 +208,10 @@ static char* format_process_info (pid_t pid)
 /* HTML source for the start of the process listing page.  */
 
 static char* page_start = 
-	"<html\n"
+	"<html>\n"
+	" <head>\n"
+	"  <title>Running Processes</title>\n"
+	" </head>\n"
 	" <body>\n"
 	"  <table cellpadding=\"4\" cellspacing=\"0\" border=\"1\">\n"
 	"   <thead>\n"
@@ -227,7 +231,7 @@ static char* page_end =
 	"   </tbody>\n"
 	"  </table>\n"
 	" </body>\n"
-	"</html\n";
+	"</html>\n";
 	
 void module_generate (int fd)
 {

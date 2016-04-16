@@ -5,12 +5,13 @@
 
 #include "server.h"
 
-/* A tempalte for the HTML page this module generates.  */
+/* A template for the HTML page this module generates.  */
 
 static char* page_template = 
 	"<html>\n"
 	" <head>\n"
-	"  <meta http-equiv=\"refresh\" content=\"5\">\n"
+	"  <title>System time</title>\n"
+	"  <meta http-equiv=\"refresh\" content=\"15\">\n"
 	" </head>\n"
 	" <body>\n"
 	"  <p>The current time is %s.</p>\n"

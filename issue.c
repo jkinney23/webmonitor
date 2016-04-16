@@ -11,6 +11,7 @@
 
 static char* page_start = 
 	"<html>\n"
+	" <head><title>/etc/issue</title></head>\n"
 	" <body>\n"
 	"  <pre>\n";
 	
