@@ -225,8 +225,11 @@ void server_run (struct in_addr local_address, uint16_t port)
 		assert (rval == 0);
 		/* Print a message.  The port number needs to be converted from
 		 * network byte order (big endian) to host byte order.  */
+		char ip4[INET_ADDRSTRLEN];
+		inet_ntop(AF_INET, &(socket_address.sin_addr), ip4, INET_ADDRSTRLEN);
 		printf("server listening on %s:%d\n",
-			   inet_ntoa (socket_address.sin_addr),
+			   //inet_ntoa (socket_address.sin_addr), // inet_ntoa obsolete...look into inet_ntop
+			   ip4,
 			   (int) ntohs (socket_address.sin_port));
 	}
 	
@@ -262,7 +265,7 @@ void server_run (struct in_addr local_address, uint16_t port)
 			assert (rval ==0);
 			/* Print a message.  */
 			printf ("connection accepted from %s\n",
-					inet_ntoa (socket_address.sin_addr));
+					inet_ntoa (socket_address.sin_addr)); // inet_ntoa <-----
 		}
 		
 		/* Fork a child process to handle the connection.  */
@@ -275,7 +278,7 @@ void server_run (struct in_addr local_address, uint16_t port)
 			/* Also this child process shouldn't do anything with the 
 			 * listening socket.  */
 			close (server_socket);
-			/* Hanlde a request from the connection.  we have our own copy
+			/* Handle a request from the connection.  We have our own copy
 			 * of the connected socket descriptor.  */
 			handle_connection (connection);
 			/* All done; close the connection socket, and end the child

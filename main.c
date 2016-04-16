@@ -60,7 +60,7 @@ int main (int argc, char* const argv[])
 	port = 0;
 	/* Don't print verbose messages.  */
 	verbose = 0;
-	/* load modules from the diectory containing this executable. */
+	/* load modules from the directory containing this executable. */
 	module_dir = get_self_executable_directory ();
 	assert (module_dir != NULL);
 	
@@ -143,7 +143,7 @@ int main (int argc, char* const argv[])
 		}
 	} while (next_option != -1);
 	
-	/* This program takes no additinal argument.  Issue an error if the
+	/* This program takes no additional arguments.  Issue an error if the
 	 * user spcified any.  */
 	if (optind != argc)
 	  print_usage (1);

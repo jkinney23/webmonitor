@@ -173,6 +173,10 @@ static char* format_process_info (pid_t pid)
 	rval = get_uid_gid (pid, &uid, &gid);
 	if (rval != 0)
 		return NULL;
+	/* Obtain the process's RSS.  */
+	rss = get_rss (pid);
+	if (rss == -1)
+		return NULL;
 	/* Obtain the process's program name.  */
 	program_name = get_program_name (pid);
 	if (program_name == NULL)
