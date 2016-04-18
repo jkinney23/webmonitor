@@ -74,7 +74,7 @@ static void clean_up_child_process (int signal_number)
 /* Process an HTTP "GET" request for PAGE, and send the results to the
  * file descriptor CONNECTION_FD.  */
 
-static void handle_get (int connection_fd, const char* page)
+static void handle_get (int connection_fd, const char* page) // page is called by "url" in handle_connection
 {
 	struct server_module* module = NULL;
 	/* Make sure the requested page begins with a slash and does not
@@ -195,8 +195,8 @@ void server_run (struct in_addr local_address, uint16_t port)
 	memset (&sigchld_action, 0, sizeof (sigchld_action));
 	sigchld_action.sa_handler = &clean_up_child_process;
 	sigaction (SIGCHLD, &sigchld_action, NULL);
-	
 	/* Create a TCP socket.  */
+// try to update with getaddrinfo page 19 beej's guide-----------	
 	server_socket = socket (PF_INET, SOCK_STREAM, 0);
 	if (server_socket == -1)
 		system_error ("socket");
@@ -206,8 +206,9 @@ void server_run (struct in_addr local_address, uint16_t port)
 	socket_address.sin_family = AF_INET;
 	socket_address.sin_port = port;
 	socket_address.sin_addr = local_address;
+//---------------update to here----------------------------------
 	/* Bind the socket to that address.  */
-	rval = bind (server_socket, &socket_address, sizeof (socket_address));
+	rval = bind (server_socket, (struct sockaddr*)&socket_address, sizeof (socket_address));
 	if (rval != 0)
 		system_error ("bind");
 	/* Instruct the socket to accept connections.  */
@@ -238,7 +239,7 @@ void server_run (struct in_addr local_address, uint16_t port)
 		int connection;
 		pid_t child_pid;
 		
-		/* Accept a connection.  This call blocks until a conncetion is
+		/* Accept a connection.  This call blocks until a connection is
 		 * ready.  */
 		address_length = sizeof (remote_address);
 		connection = accept (server_socket, &remote_address, &address_length);

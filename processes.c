@@ -192,13 +192,21 @@ static char* format_process_info (pid_t pid)
 	result = (char*) xmalloc (result_length);
 	/* Format the result.  */
 	snprintf (result, result_length,
-			  "    <tr align=\"center\">"
-			  "<td align=\"right\">%d</td>"
-//			  "<td><tt>%s</tt></td>"
-			  "<td>%s</td>"
-			  "<td>%s</td>"
-			  "<td>%s</td>"
-			  "<td align=\"right\">%d</td>"
+			  //~ "    <tr align=\"center\">"
+			  //~ "<td align=\"right\">%d</td>"
+//~ //			  "<td><tt>%s</tt></td>"
+			  //~ "<td>%s</td>"
+			  //~ "<td>%s</td>"
+			  //~ "<td>%s</td>"
+			  //~ "<td align=\"right\">%d</td>"
+			  //~ "</tr>\n",
+			  "    <tr align=\"center\">\n"
+			  "<td> %d </td>"
+//			  "<td><tt> %s </tt></td>"
+			  "<td> %s </td>"
+			  "<td> %s </td>"
+			  "<td> %s </td>"
+			  "<td> %d </td>"
 			  "</tr>\n",
 			  (int) pid, program_name, user_name, group_name, rss);
 	/* Clean up.  */
@@ -212,19 +220,35 @@ static char* format_process_info (pid_t pid)
 /* HTML source for the start of the process listing page.  */
 
 static char* page_start = 
+	"<!DOCTYPE html>\n"
 	"<html>\n"
 	" <head>\n"
 	"  <title>Running Processes</title>\n"
+	"  <link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\">\n"
+	"  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n"
+	"  <script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>"
+	"  <style type=\"text/css\">\n"
+	"   body {\n"
+    "    color: #cccccc;\n"
+    "    background-color: #003050;\n"
+	"   }\n"
+	"   .container {\n"
+	"    margin-left: auto;\n"
+	"    margin-right: auto;\n"
+	"    text-align: center;\n"
+	"   }\n"
+	"  </style>\n"
 	" </head>\n"
-	" <body>\n"
-	"  <table cellpadding=\"4\" cellspacing=\"0\" border=\"1\">\n"
+	" <body><div class=\"container\">\n"
+	//"  <table cellpadding=\"4\" cellspacing=\"0\" border=\"1\">\n"
+	"  <table class=\"table table-hover\" text-align=\"center\">\n"
 	"   <thead>\n"
 	"    <tr>\n"
-	"     <th>PID</th>\n"
-	"     <th>Program</th>\n"
-	"     <th>User</th>\n"
-	"     <th>Group</th>\n"
-	"     <th>RSS&nbsp;(BB)</th>\n"
+	"     <th> PID </th>\n"
+	"     <th> Program </th>\n"
+	"     <th> User </th>\n"
+	"     <th> Group </th>\n"
+	"     <th> RSS&nbsp;(KB) </th>\n"
 	"    </tr>\n"
 	"   </thead>\n"
 	"   <tbody>\n";
@@ -234,7 +258,7 @@ static char* page_start =
 static char* page_end = 
 	"   </tbody>\n"
 	"  </table>\n"
-	" </body>\n"
+	" </div></body>\n"
 	"</html>\n";
 	
 void module_generate (int fd)
