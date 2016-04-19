@@ -18,3 +18,6 @@ Modules are viewed in browser at `localhost:PORT/MODULE`
 - finish styling for modules (just processes left)
 - add a home page!!
 - see about adding a navigation bar (Complete!)
+
+
+License Note: The code this project is adapted from appears to be covered by the GPL version 2, which I suppose implies the code in this repository is also covererd by GPL version 2.
