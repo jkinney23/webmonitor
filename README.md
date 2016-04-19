@@ -14,7 +14,7 @@ Usage: ./server [ options ]
 Modules are viewed in browser at `localhost:PORT/MODULE`
 
 #####TODO:
-- separate html head, etc, into html.h file for DRY-er html code
-- finish styling for modules
+- separate html head, etc, into html.h file for DRY-er html code (Complete!)
+- finish styling for modules (just processes left)
 - add a home page!!
-- see about adding a navigation bar (Completed!)
+- see about adding a navigation bar (Complete!)
