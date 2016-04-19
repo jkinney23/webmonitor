@@ -12,3 +12,8 @@ Usage: ./server [ options ]
   -v, --verbose           Print verbose messages.
 ```
 Modules are viewed in browser at `localhost:PORT/MODULE`
+
+TODO:  	separate html head, etc, into html.h file for DRY-er html code
+		finish styling for modules
+		add a home page!!
+		see about adding a navigation bar
