@@ -5,19 +5,20 @@
 #include <unistd.h>
 
 #include "server.h"
+#include "html.h"
 
 /* HTML source for the start of the page we generate.  */
-
+/*
 static char* page_start = 
 	"<html>\n"
 	" <head>\n"
 	"  <title>Disk Usage and Free Space</title>\n"
 	"  <link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\">\n"
 	"  <style>\n"
-/*	"   pre {\n"
-	"    white-space: pre-wrap;\n"
-	"    word-wrap: break-word;\n"
-	"   }\n"*/
+	//~ "   pre {\n"
+	//~ "    white-space: pre-wrap;\n"
+	//~ "    word-wrap: break-word;\n"
+	//~ "   }\n"
 	"   body {\n"
     "    color: #cccccc;\n"
     "    background-color: #003050;\n"
@@ -41,7 +42,7 @@ static char* page_start =
 	"      </div>\n"
 	"     </nav>\n"
 	"   <pre>\n";
-	
+*/	
 /* HTML source for the end of the page we generate.  */
 
 static char* page_end = 
@@ -55,6 +56,7 @@ void module_generate (int fd)
 	int rval;
 	
 	/* Write the start of the page.  */
+	char* page_start = generate_head("Disk Usage and Free Space", 2, 1);
 	write (fd, page_start, strlen (page_start));
 	/* Fork a child process.  */
 	child_pid = fork ();

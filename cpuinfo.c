@@ -7,17 +7,6 @@
 #include "server.h"
 #include "html.h"
 
-/* HTML source for the start of the page we generate.  */
-/*
-static char* page_start = 
-	"<html>\n"
-	" <head>\n"
-	"  <title>Disk Usage and Free Space</title>\n"
-	" </head>\n"
-	" <body>\n"
-	"   <pre>\n";
-*/
-	
 /* HTML source for the end of the page we generate.  */
 
 static char* page_end = 
@@ -29,9 +18,11 @@ void module_generate (int fd)
 {
 	pid_t child_pid;
 	int rval;
-	char* pstart = generate_head("CPU Info");
+	
 	/* Write the start of the page.  */
-	write (fd, pstart, strlen (pstart));
+	char* page_start = generate_head("CPU Info", 1, 1);
+	write (fd, page_start, strlen (page_start));
+	
 	/* Fork a child process.  */
 	child_pid = fork ();
 	if (child_pid == 0) {
@@ -61,6 +52,7 @@ void module_generate (int fd)
 	else
 		/* The call to fork failed.  */
 		system_error ("fork");
+
 	/* Write the end of the page.  */
 	write (fd, page_end, strlen (page_end));
 }

@@ -3,7 +3,7 @@
 # Default C compiler options.
 CFLAGS					= -Wall -g
 # C source files for the server.
-SOURCES					= server.c module.c common.c main.c
+SOURCES					= server.c module.c common.c main.c html.c
 # Corresponding object files.
 OBJECTS					= $(SOURCES:.c=.o)
 # Server module library shared files.

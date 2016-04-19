@@ -41,7 +41,7 @@ static char* page_template =
 	"      </div>\n"
 	"     </nav>\n"
 	"   <pre>\n"
-	"  <p>The current time is %s.</p>\n"
+	"  <p class=\"text-center\">The current time is %s.</p>\n"
 	"   </pre>\n"
 	" </body>\n"
 	"</html>\n";
