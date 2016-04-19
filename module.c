@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "server.h"
-
+//#include "module.h"
 char* module_dir;
 
 struct server_module* module_open (const char* module_name)

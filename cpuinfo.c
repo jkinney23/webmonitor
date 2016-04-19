@@ -1,18 +1,22 @@
-#include <fcntl.h>
+#include <stdio.h>  // this is temporary for debugging
+#include <stdlib.h>
 #include <string.h>
-#include <sys/sendfile.h>
-#include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 #include "server.h"
+#include "html.h"
 
 /* HTML source for the start of the page we generate.  */
 
 static char* page_start = 
 	"<html>\n"
+	" <head>\n"
+	"  <title>Disk Usage and Free Space</title>\n"
+	" </head>\n"
 	" <body>\n"
-	"  <pre>\n";
+	"   <pre>\n";
 	
 /* HTML source for the end of the page we generate.  */
 
@@ -21,51 +25,43 @@ static char* page_end =
 	" </body>\n"
 	"</html>\n";
 	
-/* HTML source for the page indicating there was a problem opening
- * /proc/cpuinfo.  */
-
-static char* error_page = 
-	"<html>\n"
-	" <body>\n"
-	"  <p>Error: could not open /proc/cpuinfo/</p>\n"
-	" </body>\n"
-	"</html>\n";
-
-/* HTML source indicating an error.  */
-
-static char* error_message = "Error reading /proc/cpuinfo.";
-
 void module_generate (int fd)
 {
-	int input_fd;
-	struct stat file_info;
+	pid_t child_pid;
 	int rval;
 	
-	/* Open /etc/issue.  */
-	input_fd = open ("/proc/cpuinfo", O_RDONLY);
-	if (input_fd == -1)
-		system_error ("open");
-	/* Obtain file information about it.  */
-	rval = fstat (input_fd, &file_info);
-	
-	if (rval == -1)
-		/* Either we couldn't open the file or we couldn't read from it.  */
-		write (fd, error_page, strlen (error_page));
-	else {
-		int rval;
-		off_t offset = 0;
+	/* Write the start of the page.  */
+	write (fd, page_start, strlen (page_start));
+	/* Fork a child process.  */
+	child_pid = fork ();
+	if (child_pid == 0) {
+		/* This is the child process.  */
+		/* Set up an argument list for the invocation of df.  */
+		char* argv[] = { "/bin/cat", "/proc/cpuinfo", NULL }; // <----- adapt here?
 		
-		/* Write the start of the page.  */
-		write (fd, page_start, strlen (page_start));
-		/* Copy from /proc/cpuinfo to the client socket.  */
-		rval = sendfile (fd, input_fd, &offset, file_info.st_size);
+		/* Duplicate stdout and stderr to send data to the client socket.  */
+		rval = dup2 (fd, STDOUT_FILENO);
 		if (rval == -1)
-			/* Something went wrong sending the contents of /proc/cpuinfo.
-			 * write an error message.  */
-			write (fd, error_message, strlen (error_message));
-		/* End the page.  */
-		write (fd, page_end, strlen (page_end));
+			system_error ("dup2");
+		rval = dup2 (fd, STDERR_FILENO);
+		if (rval == -1)
+			system_error ("dup2");
+		/* Run df to show the free space on mounted files systems.  */
+		printf("%s\n", htmlstart);
+		execv (argv[0], argv);
+		/* A call to execv does not return unless an error occurred.  */
+		system_error ("execv");
 	}
-	
-	close (input_fd);
+	else if (child_pid > 0) {
+		/* This is the parent process.  Wait for the child process to
+		 * finish.  */
+		rval = waitpid (child_pid, NULL, 0);
+		if (rval == -1)
+			system_error ("waitpid");
+	}
+	else
+		/* The call to fork failed.  */
+		system_error ("fork");
+	/* Write the end of the page.  */
+	write (fd, page_end, strlen (page_end));
 }
