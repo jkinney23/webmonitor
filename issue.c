@@ -6,16 +6,17 @@
 #include <unistd.h>
 
 #include "server.h"
-
+#include "html.h"
 /* HTML source for the start of the page we generate.  */
 
-static char* page_start = 
+/*char* page_start = generate_head("issue");
 	"<html>\n"
 	" <head>\n"
 	"  <title>/etc/issue</title>\n"
 	" </head>\n"
 	" <body>\n"
 	"  <pre>\n";
+*/
 	
 /* HTML source for the end of the page we generate.  */
 
@@ -59,7 +60,8 @@ void module_generate (int fd)
 		off_t offset = 0;
 		
 		/* Write the start of the page.  */
-		write (fd, page_start, strlen (page_start));
+		char* pstart = generate_head("issue");
+		write (fd, pstart, strlen (pstart));
 		/* Copy from /proc(etc)/issue to the client socket.  */
 		rval = sendfile (fd, input_fd, &offset, file_info.st_size);
 		if (rval == -1)

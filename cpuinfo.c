@@ -29,9 +29,9 @@ void module_generate (int fd)
 {
 	pid_t child_pid;
 	int rval;
-	
+	char* pstart = generate_head("CPU Info");
 	/* Write the start of the page.  */
-	write (fd, page_start, strlen (page_start));
+	write (fd, pstart, strlen (pstart));
 	/* Fork a child process.  */
 	child_pid = fork ();
 	if (child_pid == 0) {
