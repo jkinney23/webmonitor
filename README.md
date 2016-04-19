@@ -17,4 +17,4 @@ Modules are viewed in browser at `localhost:PORT/MODULE`
 - separate html head, etc, into html.h file for DRY-er html code
 - finish styling for modules
 - add a home page!!
-- see about adding a navigation bar
+- see about adding a navigation bar (Completed!)
