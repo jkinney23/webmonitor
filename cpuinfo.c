@@ -1,4 +1,3 @@
-#include <stdio.h>  // this is temporary for debugging
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
@@ -9,7 +8,7 @@
 #include "html.h"
 
 /* HTML source for the start of the page we generate.  */
-
+/*
 static char* page_start = 
 	"<html>\n"
 	" <head>\n"
@@ -17,6 +16,7 @@ static char* page_start =
 	" </head>\n"
 	" <body>\n"
 	"   <pre>\n";
+*/
 	
 /* HTML source for the end of the page we generate.  */
 
@@ -47,7 +47,6 @@ void module_generate (int fd)
 		if (rval == -1)
 			system_error ("dup2");
 		/* Run df to show the free space on mounted files systems.  */
-		printf("%s\n", htmlstart);
 		execv (argv[0], argv);
 		/* A call to execv does not return unless an error occurred.  */
 		system_error ("execv");
