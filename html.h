@@ -13,32 +13,51 @@ static char* p_start =
 	"    word-wrap: break-word;\n"
 	"   }\n"
 	"   body {\n"
-    "    color: #cccccc;\n"
-    "    background-color: #003050;\n"
+	"    color: #cccccc;\n"
+	"    background-color: #003050;\n"
 	"   }\n"
 	"  </style>\n"
 	" </head>\n"
 	" <body>\n"
 	"  <nav class=\"navbar navbar-default\">\n"
 	"   <div class=\"container-fluid\">\n"
-    "    <div class=\"navbar-header\">\n"
-    "     <a class=\"navbar-brand\" href=\"#\">WebSiteName</a>\n"
-    "      </div>\n"
-    "       <ul class=\"nav navbar-nav\">\n"
-    "        <li class=\"active\"><a href=\"#\">Home</a></li>\n"
-    "        <li><a href=\"/cpuinfo\">cpuinfo</a></li>\n"
-    "        <li><a href=\"/issue\">issue</a></li>\n"
-    "        <li><a href=\"/time\">time</a></li>\n"
-    "        <li><a href=\"/processes\">processes</a></li>\n"
-    "       </ul>\n"
+	"    <div class=\"navbar-header\">\n"
+	"     <a class=\"navbar-brand\" href=\"#\">WebMonitor</a>\n"
+	"      </div>\n"
+	"       <ul class=\"nav navbar-nav\">\n"
+	"        <li%s><a href=\"#\">Home</a></li>\n"
+	"        <li%s><a href=\"/cpuinfo\">cpuinfo</a></li>\n"
+	"        <li%s><a href=\"/diskfree\">diskfree</a></li>\n"
+	"        <li%s><a href=\"/issue\">issue</a></li>\n"
+	"        <li%s><a href=\"/time\">time</a></li>\n"
+	"        <li%s><a href=\"/processes\">processes</a></li>\n"
+	"       </ul>\n"
 	"      </div>\n"
 	"     </nav>\n"
-	"   <pre>\n";
-		
-char *generate_head(char* title)
+	"%s";
+
+char *generate_head(char* title, int active_index, int pre)
 {
-	char* head = malloc(strlen(p_start) + strlen(title));
-	sprintf(head, p_start, title);
-	printf("%s", head);
+	char* argv[7];
+	char* head = malloc(strlen(p_start) + strlen(title) + 17 + 11 + 1);
+
+	// fill in args
+	for(int i = 0; i < 7; i++)
+	{
+		if(i == active_index)
+		{
+			argv[i] = " class=\"active\"";
+		}
+		else
+		{
+			argv[i] = "";
+		}
+	}
+	if (pre)
+	{
+		argv[6] == "   <pre>\n";
+	}
+
+	sprintf(head, p_start, title, argv[0], argv[1], argv[2], argv[3], argv[4], argv[5], argv[6]);
 	return head;
 }
