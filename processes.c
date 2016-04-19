@@ -12,6 +12,7 @@
 #include <unistd.h>
 
 #include "server.h"
+#include "html.h"
 
 /* Set *UID and *GID to the owning user ID and group ID, respectively,
  * of process PID.  Return 0 on success, nonzero on failure.  */
@@ -192,18 +193,9 @@ static char* format_process_info (pid_t pid)
 	result = (char*) xmalloc (result_length);
 	/* Format the result.  */
 	snprintf (result, result_length,
-			  //~ "    <tr align=\"center\">"
-			  //~ "<td align=\"right\">%d</td>"
-//~ //			  "<td><tt>%s</tt></td>"
-			  //~ "<td>%s</td>"
-			  //~ "<td>%s</td>"
-			  //~ "<td>%s</td>"
-			  //~ "<td align=\"right\">%d</td>"
-			  //~ "</tr>\n",
 			  "    <tr>\n"
 			  "<td align=\"right\">%d</td>"
 			  "<td align=\"center\"><tt>%s</tt></td>"
-			  //"<td>%s</td>"
 			  "<td>%s</td>"
 			  "<td>%s</td>"
 			  "<td>%d</td>"
@@ -218,42 +210,7 @@ static char* format_process_info (pid_t pid)
 }
 
 /* HTML source for the start of the process listing page.  */
-
-static char* page_start = 
-	"<!DOCTYPE html>\n"
-	"<html>\n"
-	" <head>\n"
-	"  <title>Running Processes</title>\n"
-	"  <link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\">\n"
-	//"  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n"
-	//"  <script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>"
-	"  <style type=\"text/css\">\n"
-	"   body {\n"
-    "    color: #cccccc;\n"
-    "    background-color: #003050;\n"
-	"   }\n"
-	"   .container {\n"
-	"    margin-left: auto;\n"
-	"    margin-right: auto;\n"
-	"    text-align: right;\n"
-	"   }\n"
-	"  </style>\n"
-	" </head>\n"
-	" <body>\n"
-	"  <nav class=\"navbar navbar-default\">\n"
-	"   <div class=\"container-fluid\">\n"
-    "    <div class=\"navbar-header\">\n"
-    "     <a class=\"navbar-brand\" href=\"#\">WebMonitor</a>\n"
-    "      </div>\n"
-    "       <ul class=\"nav navbar-nav\">\n"
-    "        <li><a href=\"#\">Home</a></li>\n"
-    "        <li><a href=\"/cpuinfo\">cpuinfo</a></li>\n"
-    "        <li><a href=\"/issue\">issue</a></li>\n"
-    "        <li><a href=\"/time\">time</a></li>\n"
-    "        <li class=\"active\"><a href=\"/processes\">processes</a></li>\n"
-    "       </ul>\n"
-	"      </div>\n"
-	"     </nav>\n"
+static char* table_template = 
 	"  <div class=\"container\">\n"
 	"   <table class=\"table table-hover text-align=\"left\">\n"
 	"    <thead>\n"
@@ -268,7 +225,6 @@ static char* page_start =
 	"    <tbody>\n";
 	
 /* HTML source for the end of the process listing page.  */
-
 static char* page_end = 
 	"    </tbody>\n"
 	"   </table>\n"
@@ -291,6 +247,11 @@ void module_generate (int fd)
 	/* The array of iovcec elements.  */
 	struct iovec* vec =
 	  (struct iovec*) xmalloc (vec_size * sizeof (struct iovec));
+	
+	/* generate page_start  */
+	char* page_head = generate_head("Running Processes", 4, 0);
+	char* page_start = malloc(strlen(page_head) + strlen(table_template) + 1);
+	page_start = strcat(page_head, table_template);
 	  
 	/* The first buffer is the HTML source for the start of the page.  */
 	vec[vec_length].iov_base = page_start;

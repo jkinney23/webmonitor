@@ -7,27 +7,15 @@
 
 #include "server.h"
 #include "html.h"
-/* HTML source for the start of the page we generate.  */
-
-/*char* page_start = generate_head("issue");
-	"<html>\n"
-	" <head>\n"
-	"  <title>/etc/issue</title>\n"
-	" </head>\n"
-	" <body>\n"
-	"  <pre>\n";
-*/
 	
 /* HTML source for the end of the page we generate.  */
-
 static char* page_end = 
 	"  </pre>\n"
 	" </body>\n"
 	"</html>\n";
 	
 /* HTML source for the page indicating there was a problem opening
- * /proc(etc)/issue.  */
-
+ * /etc/issue.  */
 static char* error_page = 
 	"<html>\n"
 	" <body>\n"
@@ -36,7 +24,6 @@ static char* error_page =
 	"</html>\n";
 
 /* HTML source indicating an error.  */
-
 static char* error_message = "Error reading /etc/issue.";
 
 void module_generate (int fd)
@@ -59,9 +46,10 @@ void module_generate (int fd)
 		int rval;
 		off_t offset = 0;
 		
-		/* Write the start of the page.  */
+		/* Generate and write the start of the page.  */
 		char* page_start = generate_head("issue", 3, 1);
 		write (fd, page_start, strlen (page_start));
+		
 		/* Copy from /etc/issue to the client socket.  */
 		rval = sendfile (fd, input_fd, &offset, file_info.st_size - 8);
 		if (rval == -1)

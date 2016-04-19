@@ -8,7 +8,6 @@
 #include "html.h"
 
 /* HTML source for the end of the page we generate.  */
-
 static char* page_end = 
 	"  </pre>\n"
 	" </body>\n"
@@ -19,7 +18,7 @@ void module_generate (int fd)
 	pid_t child_pid;
 	int rval;
 	
-	/* Write the start of the page.  */
+	/* Generate and write the start of the page.  */
 	char* page_start = generate_head("CPU Info", 1, 1);
 	write (fd, page_start, strlen (page_start));
 	
