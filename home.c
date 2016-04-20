@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/sendfile.h>
 #include <sys/stat.h>
@@ -46,11 +47,12 @@ void module_generate (int fd)
 		off_t offset = 0;
 		
 		/* Generate and write the start of the page.  */
-		char* page_start = generate_head("issue", 0, 0);
+		char* page_start = generate_head("Home", 0, 0);
 		write (fd, page_start, strlen (page_start));
+		free(page_start);
 		
-		/* Copy from /etc/issue to the client socket.  */
-		rval = sendfile (fd, input_fd, &offset, file_info.st_size - 8);
+		/* Copy from ./home.html to the client socket.  */
+		rval = sendfile (fd, input_fd, &offset, file_info.st_size);
 		if (rval == -1)
 			/* Something went wrong sending the contents of /etc/issue.
 			 * write an error message.  */

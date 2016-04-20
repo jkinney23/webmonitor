@@ -318,5 +318,6 @@ void module_generate (int fd)
 	for (i = 1; i < vec_length -1; ++i)
 		free (vec[i].iov_base);
 	/* Deallocate the iovec array.  */
+	if(page_start) free(page_start);
 	free (vec);
 }

@@ -21,6 +21,7 @@ void module_generate (int fd)
 	/* Generate and write the start of the page.  */
 	char* page_start = generate_head("Disk Usage and Free Space", 2, 1);
 	write (fd, page_start, strlen (page_start));
+	free(page_start);
 	
 	/* Fork a child process.  */
 	child_pid = fork ();

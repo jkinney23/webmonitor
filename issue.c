@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/sendfile.h>
 #include <sys/stat.h>
@@ -49,6 +50,7 @@ void module_generate (int fd)
 		/* Generate and write the start of the page.  */
 		char* page_start = generate_head("issue", 3, 1);
 		write (fd, page_start, strlen (page_start));
+		free(page_start);
 		
 		/* Copy from /etc/issue to the client socket.  */
 		rval = sendfile (fd, input_fd, &offset, file_info.st_size - 8);

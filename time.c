@@ -42,6 +42,9 @@ void module_generate (int fd)
 	
 	/* Generate the HTML output.  */
 	fprintf (fp, page_template, time_string);
+	free(page_head);
+	free(page_template);
+	
 	/* All done; flush the stream. */
 	fflush (fp);
 }
