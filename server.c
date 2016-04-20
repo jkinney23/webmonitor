@@ -85,8 +85,13 @@ static void handle_get (int connection_fd, const char* page) // page is called b
 		
 		/* The page name looks OK.  Construct the module name by appending
 		 * ".so" to the page name.  */
-		snprintf (module_file_name, sizeof (module_file_name),
-				  "%s.so", page + 1);
+		if (strcmp(page, "/") == 0) {
+			strcpy(module_file_name, "home.so");
+		}
+		else {
+			snprintf (module_file_name, sizeof (module_file_name),
+					"%s.so", page + 1);
+		}
 		/* Try to open the module.  */
 		module = module_open (module_file_name);		 
 	}

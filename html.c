@@ -34,7 +34,7 @@ static char* p_start =
 	"     <a class=\"navbar-brand\" href=\"#\">WebMonitor</a>\n"
 	"      </div>\n"
 	"       <ul class=\"nav navbar-nav\">\n"
-	"        <li%s><a href=\"#\">Home</a></li>\n"
+	"        <li%s><a href=\"/\">Home</a></li>\n"
 	"        <li%s><a href=\"/cpuinfo\">cpuinfo</a></li>\n"
 	"        <li%s><a href=\"/diskfree\">diskfree</a></li>\n"
 	"        <li%s><a href=\"/issue\">issue</a></li>\n"

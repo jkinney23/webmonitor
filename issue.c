@@ -53,7 +53,7 @@ void module_generate (int fd)
 		/* Copy from /etc/issue to the client socket.  */
 		rval = sendfile (fd, input_fd, &offset, file_info.st_size - 8);
 		if (rval == -1)
-			/* Something went wrong sending the contents of /proc/issue.
+			/* Something went wrong sending the contents of /etc/issue.
 			 * write an error message.  */
 			write (fd, error_message, strlen (error_message));
 		/* End the page.  */
