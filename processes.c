@@ -25,7 +25,7 @@ static int get_uid_gid (pid_t pid, uid_t* uid, gid_t* gid)
 	
 	/* Generate the name of the process's directory in /proc.  */
 	snprintf (dir_name, sizeof (dir_name), "/proc/%d", (int) pid);
-	/* Obtain informatin about the directory.  */
+	/* Obtain information about the directory.  */
 	rval = stat (dir_name, &dir_info);
 	if (rval != 0)
 		/* Couldn't find it; perhaps this process no longer exists.  */
@@ -318,6 +318,6 @@ void module_generate (int fd)
 	for (i = 1; i < vec_length -1; ++i)
 		free (vec[i].iov_base);
 	/* Deallocate the iovec array.  */
-	if(page_start) free(page_start);
+	//if(page_start) free(page_start);
 	free (vec);
 }
