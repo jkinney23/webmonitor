@@ -7,7 +7,7 @@ SOURCES					= server.c module.c common.c main.c html.c
 # Corresponding object files.
 OBJECTS					= $(SOURCES:.c=.o)
 # Server module library shared files.
-MODULES					= diskfree.so issue.so processes.so time.so cpuinfo.so home.so
+MODULES					= diskfree.so issue.so processes.so time.so cpuinfo.so home.so top.so
 
 ### Rules.  ############################################################
 

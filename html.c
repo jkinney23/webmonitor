@@ -40,6 +40,7 @@ static char* p_start =
 	"<li%s><a href=\"/issue\">issue</a></li>\n"
 	"<li%s><a href=\"/processes\">processes</a></li>\n"
 	"<li%s><a href=\"/time\">time</a></li>\n"
+	"<li%s><a href=\"/top\">top</a></li>\n"
 	"</ul>\n"
 	"</div>\n"
 	"</nav>\n"
@@ -47,12 +48,12 @@ static char* p_start =
 
 char *generate_head(char* title, int active_index, int pre)
 {
-	char* argv[7];
+	char* argv[8];
 	char* head = malloc(strlen(p_start) + strlen(title) + 17 + 11 + 1);
 	int i;
 	
 	/* fill in args  */
-	for(i = 0; i < 7; i++)
+	for(i = 0; i < 8; i++)
 	{
 		if(i == active_index)
 		{
@@ -65,11 +66,11 @@ char *generate_head(char* title, int active_index, int pre)
 	}
 	if (pre)
 	{
-		argv[6] = "   <pre>\n";
+		argv[7] = "   <pre>\n";
 	}
 
 	/* generate the page start  */
-	sprintf(head, p_start, title, argv[0], argv[1], argv[2], argv[3], argv[4], argv[5], argv[6]);
+	sprintf(head, p_start, title, argv[0], argv[1], argv[2], argv[3], argv[4], argv[5], argv[6], argv[7]);
 	return head;
 }
 
