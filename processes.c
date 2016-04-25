@@ -212,7 +212,7 @@ static char* format_process_info (pid_t pid)
 /* HTML source for the start of the process listing page.  */
 static char* table_template = 
 	"  <div class=\"container\">\n"
-	"   <table class=\"table table-hover text-align=\"left\">\n"
+	"   <table class=\"table table-hover table-condensed text-align=\"left\">\n"
 	"    <thead>\n"
 	"     <tr>\n"
 	"      <th class=\"text-right\">PID</th>\n"
@@ -256,7 +256,7 @@ void module_generate (int fd)
 	/* The first buffer is the HTML source for the start of the page.  */
 	vec[vec_length].iov_base = page_start;
 	vec[vec_length].iov_len = strlen (page_start);
-	++vec_length;
+	vec_length++;
 	
 	/* Start a directory listing for /proc.  */
 	proc_listing = opendir ("/proc");
