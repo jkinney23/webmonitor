@@ -15,9 +15,11 @@ Modules are viewed in browser at `localhost:PORT/MODULE`
 
 #####TODO:
 - separate html head, etc, into html.h file for DRY-er html code (Complete!)
-- finish styling for modules (just processes left)
-- add a home page!!
+- finish styling for modules (Complete!)
+- add a home page (Complete!)
 - see about adding a navigation bar (Complete!)
-
+- add nav buttons to footer
+- clean up and separate nav-bar generation (future)
+- separate and clean up other html generation (future)
 
 License Note: The code this project is adapted from appears to be covered by the GPL version 2, which I suppose implies the code in this repository is also covererd by GPL version 2.
