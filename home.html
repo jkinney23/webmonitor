@@ -1,35 +1,29 @@
   <div class="container-fluid">
-   <h1 class="text-center" style="height: 100px;">Welcome!!!</h1>
+    <div class="col-md-8 col-md-offset-2" style="color:#fcfcfc; height: 150px;">
+      <h1 class="text-left" >Linux system information</h1>
+         <h3>The following modules are available</h3>
+    </div>
   </div>
   
   <div class="container-fluid">
   <div class="row">
 	
 	<div class="col-md-4 col-md-offset-2" style="color:#777;">
-		<div class="panel panel-default">
+	  <div class="panel panel-default">
         <div class="panel-heading"><a href=/cpuinfo>cpuinfo</a></div>
         <div class="panel-body"><p>Displays the system's processor information as reported by the proc filesystem.</p><p>This module copies the file /proc/cpuinfo to the socket descriptor.</p></div>
-        </div>
-	</div>
-    
-	<div class="col-md-4" style="color:#777;">
-		<div class="panel panel-default">
+      </div>
+	
+	  <div class="panel panel-default">
         <div class="panel-heading"><a href=/diskfree>diskfree</a></div>
         <div class="panel-body"><p>Displays the disk usage and free space of all drive partitions currently connected to the system.</p><p></p>This module executes the 'df' command with '-h' option.</p></div>
-        </div>
-	</div>
+      </div>
 	
-  </div>
-  </div>
-
-  <div class="container-fluid">
-  <div class="row">
-	
-	<div class="col-md-4 col-md-offset-2" style="color:#777;">
-		<div class="panel panel-default">
+	  <div class="panel panel-default">
         <div class="panel-heading"><a href=/issue>issue</a></div>
-        <div class="panel-body"><p>Displays the current system's issue: the distribution, os/kernel, and version codename.</p><p>This module copies the file /etc/issue to the socket descriptor.</p></div>
-        </div>
+        <div class="panel-body">
+		<p>Displays the current system's issue: the distribution, os/kernel, and version codename.</p><p>This module copies the file /etc/issue to the socket descriptor.</p></div>
+      </div>
 	</div>
     
 	<div class="col-md-4" style="color:#777;">
@@ -37,20 +31,14 @@
         <div class="panel-heading"><a href=/processes>processes</a></div>
         <div class="panel-body"><p>Displays all processes currently running on the system by process ID and reports the executing user and group ownership.</p><p>This module dynamically generates the process list by reading the /proc directory and extracting the information from each process's directory.</p></div>
         </div>
-	</div>
 	
-  </div>
-  </div>  <div class="container-fluid">
-  <div class="row">
 	
-	<div class="col-md-4 col-md-offset-2" style="color:#777;">
+
 		<div class="panel panel-default">
         <div class="panel-heading"><a href=/time>time</a></div>
-        <div class="panel-body"><p>Displays the system time.</p><p>This module uses the 'gettimeofday' function to get system time and formats if for printing with the 'strftime' function.</p></div>
+        <div class="panel-body"><p>Displays the system time.</p><p>This module uses the 'gettimeofday' function to get system time and formats it for printing with the 'strftime' function.</p></div>
         </div>
-	</div>
-    
-	<div class="col-md-4" style="color:#777;">
+	
 		<div class="panel panel-default">
         <div class="panel-heading"><a href=/top>top</a></div>
         <div class="panel-body"><p>Displays various process and memory information on the running system.</p><p></p>This module executes the 'top' command and immediately exits with the'-bn1' option.</p></div>
