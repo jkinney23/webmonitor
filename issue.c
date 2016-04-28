@@ -12,8 +12,14 @@
 /* HTML source for the end of the page we generate.  */
 static char* page_end = 
 	"  </pre>\n"
-	"<div class=\"text-center\">"
-	"<a href=\"/\" class=\"btn btn-default btn-lg\" role=\"button\">Home</a>"
+	"<div class=\"col-md-2 col-md-offset-3\">"
+	"<a href=\"/diskfree\" class=\"btn btn-default btn-block\" role=\"button\">Previous</a>"
+	"</div>"
+	"<div class=\"col-md-2\">"
+	"<a href=\"/\" class=\"btn btn-default btn-block\" role=\"button\">Home</a>"
+	"</div>"
+	"<div class=\"col-md-2\">"
+	"<a href=\"/processes\" class=\"btn btn-default btn-block\" role=\"button\">Next</a>"
 	"</div>"
 	" </body>\n"
 	"</html>\n";
@@ -55,6 +61,10 @@ void module_generate (int fd)
 		write (fd, page_start, strlen (page_start));
 		free(page_start);
 		
+		/* Center text */
+		char* centerdiv = "<div class=\"container-fluid text-center\" style=\"height: 80px;\">";
+		write (fd, centerdiv, strlen(centerdiv));
+		
 		/* Copy from /etc/issue to the client socket.  */
 		rval = sendfile (fd, input_fd, &offset, file_info.st_size);
 		if (rval == -1)
@@ -62,6 +72,7 @@ void module_generate (int fd)
 			 * write an error message.  */
 			write (fd, error_message, strlen (error_message));
 		/* End the page.  */
+		write (fd, "</div>", 6);
 		write (fd, page_end, strlen (page_end));
 	}
 	

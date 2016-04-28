@@ -10,8 +10,14 @@
 /* HTML source for the end of the page we generate.  */
 static char* page_end = 
 	"  </pre>\n"
-	"<div class=\"text-center\">"
-	"<a href=\"/\" class=\"btn btn-default btn-lg\" role=\"button\">Home</a>"
+	"<div class=\"col-md-2 col-md-offset-3\">"
+	"<a href=\"#\" class=\"btn btn-default btn-block disabled\" role=\"button\">Previous</a>"
+	"</div>"
+	"<div class=\"col-md-2\">"
+	"<a href=\"/\" class=\"btn btn-default btn-block\" role=\"button\">Home</a>"
+	"</div>"
+	"<div class=\"col-md-2\">"
+	"<a href=\"/diskfree\" class=\"btn btn-default btn-block\" role=\"button\">Next</a>"
 	"</div>"
 	" </body>\n"
 	"</html>\n";
