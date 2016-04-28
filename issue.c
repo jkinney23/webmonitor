@@ -12,6 +12,9 @@
 /* HTML source for the end of the page we generate.  */
 static char* page_end = 
 	"  </pre>\n"
+	"<div class=\"text-center\">"
+	"<a href=\"/\" class=\"btn btn-default btn-lg\" role=\"button\">Home</a>"
+	"</div>"
 	" </body>\n"
 	"</html>\n";
 	
@@ -34,7 +37,7 @@ void module_generate (int fd)
 	int rval;
 	
 	/* Open /etc/issue.  */
-	input_fd = open ("/etc/issue", O_RDONLY);
+	input_fd = open ("/etc/issue.net", O_RDONLY);
 	if (input_fd == -1)
 		system_error ("open");
 	/* Obtain file information about it.  */
@@ -53,7 +56,7 @@ void module_generate (int fd)
 		free(page_start);
 		
 		/* Copy from /etc/issue to the client socket.  */
-		rval = sendfile (fd, input_fd, &offset, file_info.st_size - 8);
+		rval = sendfile (fd, input_fd, &offset, file_info.st_size);
 		if (rval == -1)
 			/* Something went wrong sending the contents of /etc/issue.
 			 * write an error message.  */

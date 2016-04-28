@@ -1,5 +1,5 @@
   <div class="container-fluid">
-    <div class="col-md-8 col-md-offset-2" style="color:#fcfcfc; height: 150px;">
+    <div class="col-md-8 col-md-offset-1" style="color:#fcfcfc; height: 150px;">
       <h1 class="text-left" >Linux system information</h1>
          <h3>The following modules are available</h3>
     </div>
@@ -11,18 +11,18 @@
 	<div class="col-md-4 col-md-offset-2" style="color:#777;">
 	  <div class="panel panel-default">
         <div class="panel-heading"><a href=/cpuinfo>cpuinfo</a></div>
-        <div class="panel-body"><p>Displays the system's processor information as reported by the proc filesystem.</p><p>This module copies the file /proc/cpuinfo to the socket descriptor.</p></div>
+        <div class="panel-body"><p>Displays the system's processor information as reported by the proc filesystem.</p><p>This module executes the 'cat' command and uses a socket stream to send the output of /proc/cpuinfo to the browser.</p></div>
       </div>
 	
 	  <div class="panel panel-default">
         <div class="panel-heading"><a href=/diskfree>diskfree</a></div>
-        <div class="panel-body"><p>Displays the disk usage and free space of all drive partitions currently connected to the system.</p><p></p>This module executes the 'df' command with '-h' option.</p></div>
+        <div class="panel-body"><p>Displays the disk usage and free space of all drive partitions currently connected to the system.</p><p>This module executes the 'df' command with '-h' option and uses a socket stream to send output to the browser.</p></div>
       </div>
 	
 	  <div class="panel panel-default">
         <div class="panel-heading"><a href=/issue>issue</a></div>
         <div class="panel-body">
-		<p>Displays the current system's issue: the distribution, os/kernel, and version codename.</p><p>This module copies the file /etc/issue to the socket descriptor.</p></div>
+		<p>Displays the current system's issue: the distribution, os/kernel, and version codename.</p><p>This module copies the file /etc/issue.net to the socket descriptor.</p></div>
       </div>
 	</div>
     

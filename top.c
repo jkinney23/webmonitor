@@ -10,6 +10,9 @@
 /* HTML source for the end of the page we generate.  */
 static char* page_end = 
 	"  </pre>\n"
+	"<div class=\"text-center\">"
+	"<a href=\"/\" class=\"btn btn-default btn-lg\" role=\"button\">Home</a>"
+	"</div>"
 	" </body>\n"
 	"</html>\n";
 	

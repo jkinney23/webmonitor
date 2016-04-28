@@ -13,6 +13,9 @@ static char* time_template =
 	"  <meta http-equiv=\"refresh\" content=\"15\">\n"
 	"  <p class=\"text-center\">The current time is: <strong>%s</strong></p>\n"
 	"   </pre>\n"
+	"<div class=\"text-center\">"
+	"<a href=\"/\" class=\"btn btn-default btn-lg\" role=\"button\">Home</a>"
+	"</div>"
 	" </body>\n"
 	"</html>\n";
 	

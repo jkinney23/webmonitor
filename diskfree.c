@@ -10,6 +10,9 @@
 /* HTML source for the end of the page we generate.  */
 static char* page_end = 
 	"  </pre>\n"
+	"<div class=\"text-center\">"
+	"<a href=\"/\" class=\"btn btn-default btn-lg\" role=\"button\">Home</a>"
+	"</div>"
 	" </body>\n"
 	"</html>\n";
 	
@@ -28,7 +31,7 @@ void module_generate (int fd)
 	if (child_pid == 0) {
 		/* This is the child process.  */
 		/* Set up an argument list for the invocation of df.  */
-		char* argv[] = { "/bin/df", "-h", NULL }; // <----- adapt here?
+		char* argv[] = { "/bin/df", "-h", NULL };
 		
 		/* Duplicate stdout and stderr to send data to the client socket.  */
 		rval = dup2 (fd, STDOUT_FILENO);
@@ -52,6 +55,7 @@ void module_generate (int fd)
 	else
 		/* The call to fork failed.  */
 		system_error ("fork");
+		
 	/* Write the end of the page.  */
 	write (fd, page_end, strlen (page_end));
 }
