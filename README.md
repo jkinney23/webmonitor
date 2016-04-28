@@ -18,7 +18,7 @@ Modules are viewed in browser at `localhost:PORT/MODULE`
 - finish styling for modules (Complete!)
 - add a home page (Complete!)
 - see about adding a navigation bar (Complete!)
-- add nav buttons to footer
+- add nav buttons to footer (Complete!)
 - clean up and separate nav-bar generation (future)
 - separate and clean up other html generation (future)
 
